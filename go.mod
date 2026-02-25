@@ -34,5 +34,5 @@ require (
 
 require (
 	github.com/rneatherway/slack v0.0.0-20241101104547-9d405489f5bc
-	github.com/slack-go/slack v0.17.2
+	github.com/slack-go/slack v0.17.3
 )
