@@ -54,11 +54,11 @@ func main() {
 	fmt.Println()
 }
 
-// See https://api.slack.com/methods/conversations.replies
-func Replies(client *slackapi.Client, channelID string, threadTs string) (*HistoryResponse, error) {
+// Replies retrieves conversation replies for a thread. See https://api.slack.com/methods/conversations.replies
+func Replies(client *slackapi.Client, channelID string, threadTS string) (*HistoryResponse, error) {
 	params := map[string]string{
 		"channel": channelID,
-		"ts":      threadTs,
+		"ts":      threadTS,
 	}
 
 	body, err := client.API(context.Background(), "POST", "conversations.replies", params, nil)
@@ -79,7 +79,7 @@ func Replies(client *slackapi.Client, channelID string, threadTs string) (*Histo
 	return historyResponse, nil
 }
 
-// getThreadsFromLast7Days retrieves all threads from the last 7 days in a specific channel
+// Threads retrieves all threads since the given time in a specific channel.
 func Threads(client *slackapi.Client, channelID string, oldest time.Time) ([]slack.Message, error) {
 	// Calculate timestamp for 7 days ago
 	var allThreads []slack.Message
@@ -99,11 +99,11 @@ func Threads(client *slackapi.Client, channelID string, oldest time.Time) ([]sla
 
 		resp, err := client.API(context.Background(), "POST", "conversations.history", params, nil)
 		if err != nil {
-			return nil, fmt.Errorf("error getting conversation history: %v", err)
+			return nil, fmt.Errorf("error getting conversation history: %w", err)
 		}
 		var history slack.GetConversationHistoryResponse
 		if err := json.Unmarshal(resp, &history); err != nil {
-			return nil, fmt.Errorf("error unmarshalling conversation history: %v", err)
+			return nil, fmt.Errorf("error unmarshalling conversation history: %w", err)
 		}
 
 		// Filter messages that have thread_ts (are part of a thread)

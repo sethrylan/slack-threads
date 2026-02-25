@@ -9,23 +9,24 @@ type CursorResponseMetadata struct {
 }
 
 type Attachment struct {
-	ID   int
-	Text string
+	ID   int    `json:"id"`
+	Text string `json:"text"`
 }
 
 type Message struct {
-	User        string
-	BotID       string `json:"bot_id"`
-	Text        string
-	Attachments []Attachment
-	Ts          string
-	Type        string
-	ReplyCount  int `json:"reply_count"`
+	User        string       `json:"user"`
+	BotID       string       `json:"bot_id"`
+	Text        string       `json:"text"`
+	Attachments []Attachment `json:"attachments"`
+	TS          string       `json:"ts"`
+	Type        string       `json:"type"`
+	ReplyCount  int          `json:"reply_count"`
 }
 
 type HistoryResponse struct {
 	CursorResponseMetadata
-	Ok       bool
-	HasMore  bool `json:"has_more"`
-	Messages []Message
+
+	Ok       bool      `json:"ok"`
+	HasMore  bool      `json:"has_more"`
+	Messages []Message `json:"messages"`
 }
