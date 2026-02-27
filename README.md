@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> Replaced with https://github.com/sethrylan/slack-reader
+
 # slack-threads
 
 A CLI tool that lists threaded conversations from a Slack channel. Uses cookie-based authentication via [rneatherway/slack](https://github.com/rneatherway/slack) to access the Slack API without requiring a bot token.
